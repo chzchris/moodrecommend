@@ -21,12 +21,14 @@ def get_tempo_filter_result(album, rhythm_input):
   if len(full_match_result) > 0:
     result['artist'] = full_match_reult[0]['ARTIST'][0]['VALUE']
     result['song'] = full_match_reult[0]['TRACK'][0]['TITLE'][0]['VALUE']
+    result['cover_url'] = full_match_reult[0]['URL'][0]['VALUE']
   else:
     tempo_speed = int(rhythm_input['tempo_speed'][:-1])
     map_result = map(lambda x: abs(int(x['TRACK'][0]['TEMPO'][0]['VALUE'][:-1]) - tempo_speed), album)
     min_index = map_result.index(min(map_result))
     result['artist'] = album[min_index]['ARTIST'][0]['VALUE']
     result['song'] = album[min_index]['TRACK'][0]['TITLE'][0]['VALUE']
+    result['cover_url'] = album[min_index]['URL'][0]['VALUE']
   return result
 
 def get_gerne_mapping(rhythm_input):
