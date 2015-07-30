@@ -73,6 +73,10 @@ def get_rhythm_api_url(rhythm_input):
 def get_genre_api_url():
   return "https://c1793280.web.cddbp.net/webapi/json/1.0/radio/fieldvalues?client=1793280-7808DAD28CB8E790045FC5C0D9F9E962&user=261582402794837245-41824A367E0E6B5A4BA7816ECF761612&fieldname=radiogenre"
 
+@app.route("/recmd")
+def recmd():
+  return render_template('test.html')
+
 if __name__ == "__main__":
   app.debug = True
   app.run()
