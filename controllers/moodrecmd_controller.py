@@ -60,7 +60,10 @@ def get_mood_by_artist_and_song(artists_list, songs_list):
     json_data = get_webapi_url(artists_list[i], songs_list[i])
     metadata = {}
     metadata["mood"] = json_data['RESPONSE']['ALBUM']['TRACK']['MOOD']['1']['ID']
-    metadata["era"] = json_data['RESPONSE']['ALBUM']['ARTIST_ERA']['ID']
+    if ('1' in json_data['RESPONSE']['ALBUM']['ARTIST_ERA']):
+       metadata["era"] = json_data['RESPONSE']['ALBUM']['ARTIST_ERA']['1']['ID']
+    else:
+      metadata["era"] = json_data['RESPONSE']['ALBUM']['ARTIST_ERA']['ID']
     metadata["genre"] = json_data['RESPONSE']['ALBUM']['GENRE']['1']['GENRE']
     metadata["tempo"] = json_data['RESPONSE']['ALBUM']['TRACK']['TEMPO']['1']['ID']
     metadata["tempo_speed"] = json_data['RESPONSE']['ALBUM']['TRACK']['TEMPO']['3']['TEMPO']
