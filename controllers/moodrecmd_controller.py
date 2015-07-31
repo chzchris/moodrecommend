@@ -2,7 +2,7 @@ from flask import Flask
 from flask import json, render_template
 import requests
 app = Flask(__name__)
-
+#test
 @app.route("/mood/recommend/<artists>/<songs>")
 def recommend(artists, songs):
   artists_list = artists.split('&')
