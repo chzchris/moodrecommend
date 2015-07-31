@@ -19,9 +19,9 @@ def get_tempo_filter_result(album, rhythm_input):
   result = {}
   full_match_result = filter(lambda x: x['TRACK'][0]['TEMPO'][0]['VALUE'] == rhythm_input['tempo_speed'], album)
   if len(full_match_result) > 0:
-    result['artist'] = full_match_reult[0]['ARTIST'][0]['VALUE']
-    result['song'] = full_match_reult[0]['TRACK'][0]['TITLE'][0]['VALUE']
-    result['cover_url'] = full_match_reult[0]['URL'][0]['VALUE']
+    result['artist'] = full_match_result[0]['ARTIST'][0]['VALUE']
+    result['song'] = full_match_result[0]['TRACK'][0]['TITLE'][0]['VALUE']
+    result['cover_url'] = full_match_result[0]['URL'][0]['VALUE']
   else:
     tempo_speed = int(rhythm_input['tempo_speed'][:-1])
     map_result = map(lambda x: abs(int(x['TRACK'][0]['TEMPO'][0]['VALUE'][:-1]) - tempo_speed), album)
@@ -68,7 +68,7 @@ def get_webapi_url(artist, song):
 
 
 def get_rhythm_api_url(rhythm_input):
-  return "https://c1793280.web.cddbp.net/webapi/json/1.0/radio/recommend?client=1793280-7808DAD28CB8E790045FC5C0D9F9E962&user=261582402794837245-41824A367E0E6B5A4BA7816ECF761612&genre="+rhythm_input['genre']+"&era="+rhythm_input['era']+"&mood="+rhythm_input['mood']+"&select_extended=tempo,mood&filter_mood="+rhythm_input['mood']
+  return "https://c1793280.web.cddbp.net/webapi/json/1.0/radio/recommend?client=1793280-7808DAD28CB8E790045FC5C0D9F9E962&user=261582402794837245-41824A367E0E6B5A4BA7816ECF761612&genre="+rhythm_input['genre']+"&era="+rhythm_input['era']+"&mood="+rhythm_input['mood']+"&select_extended=tempo,mood,cover&filter_mood="+rhythm_input['mood']
 
 def get_genre_api_url():
   return "https://c1793280.web.cddbp.net/webapi/json/1.0/radio/fieldvalues?client=1793280-7808DAD28CB8E790045FC5C0D9F9E962&user=261582402794837245-41824A367E0E6B5A4BA7816ECF761612&fieldname=radiogenre"
