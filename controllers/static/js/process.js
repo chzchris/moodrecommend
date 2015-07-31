@@ -47,42 +47,32 @@ function getRecommend() {
 
 	var req = new XMLHttpRequest();
 
-	//req.open("GET", query, true);
-	//req.send();
+	req.open("GET", query, true);
+	req.send();
 
-	//alert(req.responseText)
-
-	var resultJSON = {"artist":"Jason Mraz", "song":"I'm Yours", "cover_url":"http://akamai-b.cdn.cddbp.net/cds/2.0/cover/AF0A/365F/FDE4/F518_medium_front.jpg"};
-	//var ele = document.getElementById("result");
-	var result = document.getElementById("resultTrack");
-	var coverArt = document.getElementById("resultArt");
-	//result.className = "track";
-	//result.appendChild(document.createTextNode(resultJSON.song + " - " + resultJSON.artist));
-	result.innerHTML = resultJSON.song + " - " + resultJSON.artist;
-	ele.style.display = "block";
-	/*
+	console.log(query);
 	// Create the callback
 	req.onreadystatechange = function() {
 		if (req.readyState==4 && req.status == 200) {
 		// Request successful, read the response
-		
-		var ele = document.getElementById("recommend");
-		ele.innerHTML = "<pre>"+req.responseText+"</pre>";
+
+		var resultJSON = JSON.parse(req.responseText);
+		var result = document.getElementById("resultTrack");
+		var coverArt = document.getElementById("resultArt");
+		result.innerHTML = resultJSON.song + " - " + resultJSON.artist;
+        coverArt.src = resultJSON.cover_url;
 		ele.style.display = "block";
 
-		//var textresponse = req.responseText;
-		//var resultJSON = JSON.parse(textresponse);
-		var resultJSON = JSON.parse(req.responseTex);
-		alert(Object.keys(resultJSON));
-		
+		/*
 		var ele = document.getElementById("playlist");
 		var result = document.createElement('li');
 		result.className = "track";
 		result.appendChild(document.createTextNode(resultJSON.song + " - " + resultJSON.artist));
 		ele.appendChild(result);
+		*/
 		}
 	}
-	*/
+	
 
 	//alert(query)
 }
