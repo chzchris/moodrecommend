@@ -71,14 +71,23 @@
       </table>
       <button type="button" class="btn btn-default" style="float: right;" onClick="getRecommend()">Recommend</button>
     </div>
-    <div class="col-md-6">
-      <p>Here is what I recommend -</p>
+    <div class="col-md-3">
+      <h3>Here is what I recommend...</h3>
+      <!--
       <ol id="playlist">
         <li class="track">I'm Yours - Jason Mraz</li>
         <li class="track">You Give Me Something - James Morrison</li>
         <li class="track">Wherever You Will Go - The Calling</li>
+        <li id="recommend" class="track" style="display: block"><img class="img-thumbnail" src="http://akamai-b.cdn.cddbp.net/cds/2.0/cover/AF0A/365F/FDE4/F518_medium_front.jpg"><br>Test</li>
       </ol>
-      <div id="recommend" style="display: none">
+      -->
+      <div id="result" class="panel panel-primary panel-primary-custom" style="display: none">
+        <div class="panel-heading panel-heading-custom">
+          <h3 id="resultTrack" class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          <img id="resultArt" class="img-thumbnail" src="{{ url_for('static', filename='F518_medium_front.jpg') }}">
+        </div>
       </div>
     </div>
     <div class="clearfix"></div>

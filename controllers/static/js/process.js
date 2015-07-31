@@ -1,4 +1,12 @@
 function getRecommend() {
+	var ele = document.getElementById("result");
+	if (ele.style.display != "none") {
+		var result = document.getElementById("resultTrack");
+		result.innerHTML = "";
+		ele.style.display = "none";
+	}
+
+
 	var artist1 = document.getElementById("artist-1").value;
 	var track1 = document.getElementById("track-1").value;
 	var artist2 = document.getElementById("artist-2").value;
@@ -42,18 +50,30 @@ function getRecommend() {
 	req.open("GET", query, true);
 	req.send();
 
-	//alert(req.responseText)
-	
+	console.log(query);
 	// Create the callback
 	req.onreadystatechange = function() {
 		if (req.readyState==4 && req.status == 200) {
 		// Request successful, read the response
-		var ele = document.getElementById("recommend");
-		ele.innerHTML = "<pre>"+req.responseText+"</pre>";
+
+		var resultJSON = JSON.parse(req.responseText);
+		var result = document.getElementById("resultTrack");
+		var coverArt = document.getElementById("resultArt");
+		result.innerHTML = resultJSON.song + " - " + resultJSON.artist;
+        coverArt.src = resultJSON.cover_url;
 		ele.style.display = "block";
+
+		/*
+		var ele = document.getElementById("playlist");
+		var result = document.createElement('li');
+		result.className = "track";
+		result.appendChild(document.createTextNode(resultJSON.song + " - " + resultJSON.artist));
+		ele.appendChild(result);
+		*/
 		}
 	}
+	
 
-	alert(query)
+	//alert(query)
 }
 
