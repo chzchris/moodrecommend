@@ -44,11 +44,65 @@ def get_gerne_mapping(rhythm_input):
 
 def get_rhythm_api_input(artist_data):
   key_list = list(artist_data[0].keys())
-  intersection = dict(set.intersection(*(set(d.iteritems()) for d in artist_data)))
-  if len(intersection) < len(key_list):
-    for key in key_list:
-      if (key in intersection) == False:
-        intersection[key] = artist_data[0][key]
+  intersection = artist_data[0]
+  mood = ""
+  genre = ""
+  era = ""
+  tempo = ""
+  tempo_s = ""
+  mood_hash = {}
+  genre_hash = {}
+  era_hash = {}
+  tempo_hash = {}
+  tempo_s_hash = {}
+  for i in range(0, len(artist_data)):
+    if (artist_data[i]['mood'] in mood_hash):
+      mood_hash[artist_data[i]['mood']] += 1
+      mood = artist_data[i]['mood']
+    else:
+      mood_hash[artist_data[i]['mood']] = 1
+
+    if (artist_data[i]['era'] in era_hash):
+      era_hash[artist_data[i]['era']] += 1
+      era = artist_data[i]['era']
+    else:
+      era_hash[artist_data[i]['era']] = 1
+
+    if (artist_data[i]['genre'] in genre_hash):
+      genre_hash[artist_data[i]['genre']] += 1
+      genre = artist_data[i]['genre']
+    else:
+      genre_hash[artist_data[i]['genre']] = 1
+
+    if (artist_data[i]['tempo'] in tempo_hash):
+      tempo_hash[artist_data[i]['tempo']] += 1
+      tempo = artist_data[i]['tempo']
+    else:
+      tempo_hash[artist_data[i]['tempo']] = 1
+
+    if (artist_data[i]['tempo_speed'] in tempo_s_hash):
+      tempo_s_hash[artist_data[i]['tempo_speed']] += 1
+      tempo_s = artist_data[i]['tempo_speed']
+    else:
+      tempo_s_hash[artist_data[i]['tempo_speed']] = 1
+
+  mood_hash
+
+  if mood != "":
+    intersection['mood'] = mood
+
+  if era != "":
+    intersection['era'] = era
+
+  if genre != "":
+    intersection['genre'] = genre
+
+  if tempo != "":
+    intersection['tempo'] = tempo
+
+  if tempo_s != "":
+    intersection['tempo_speed'] = tempo_s
+
   return intersection
 
 def get_recommed_by_metadata(rhythm_input):
