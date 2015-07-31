@@ -1,4 +1,12 @@
 function getRecommend() {
+	var ele = document.getElementById("result");
+	if (ele.style.display != "none") {
+		var result = document.getElementById("resultTrack");
+		result.innerHTML = "";
+		ele.style.display = "none";
+	}
+
+
 	var artist1 = document.getElementById("artist-1").value;
 	var track1 = document.getElementById("track-1").value;
 	var artist2 = document.getElementById("artist-2").value;
@@ -45,12 +53,13 @@ function getRecommend() {
 	//alert(req.responseText)
 
 	var resultJSON = {"artist":"Jason Mraz", "song":"I'm Yours", "cover_url":"http://akamai-b.cdn.cddbp.net/cds/2.0/cover/AF0A/365F/FDE4/F518_medium_front.jpg"};
-	var ele = document.getElementById("playlist");
-	var result = document.createElement('li');
-	var coverArt = document.createElement('li');
-	result.className = "track";
-	result.appendChild(document.createTextNode(resultJSON.song + " - " + resultJSON.artist));
-	ele.appendChild(result);
+	//var ele = document.getElementById("result");
+	var result = document.getElementById("resultTrack");
+	var coverArt = document.getElementById("resultArt");
+	//result.className = "track";
+	//result.appendChild(document.createTextNode(resultJSON.song + " - " + resultJSON.artist));
+	result.innerHTML = resultJSON.song + " - " + resultJSON.artist;
+	ele.style.display = "block";
 	/*
 	// Create the callback
 	req.onreadystatechange = function() {

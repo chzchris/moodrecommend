@@ -21,6 +21,17 @@
     color: #fff; 
 }
 
-.panel-heading-custom {
+.panel-primary.panel-primary-custom {
+  border-color: #5D6C79;
+}
+
+.panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.panel-primary > .panel-heading.panel-heading-custom {
     background-color: #5D6C79;
+    border-color: #5D6C79;
 }
