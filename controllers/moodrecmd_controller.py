@@ -35,7 +35,10 @@ def get_gerne_mapping(rhythm_input):
   json_data = json.loads(requests.get(get_genre_api_url()).text)
   genre_list = json_data['RESPONSE'][0]['GENRE']
   genre_list = filter(lambda x: x['VALUE'] == rhythm_input['genre'], genre_list)
-  rhythm_input['genre'] = genre_list[0]['ID']
+  if len(genre_list) > 0:
+    rhythm_input['genre'] = genre_list[0]['ID']
+  else:
+    rhythm_input['genre'] = '36056'
   return rhythm_input
 
 def get_rhythm_api_input(artist_data):
@@ -44,7 +47,7 @@ def get_rhythm_api_input(artist_data):
   if len(intersection) < len(key_list):
     for key in key_list:
       if (key in intersection) == False:
-        intersection[key] = artist_data[0][artist_data]
+        intersection[key] = artist_data[0][key]
   return intersection
 
 def get_recommed_by_metadata(rhythm_input):
