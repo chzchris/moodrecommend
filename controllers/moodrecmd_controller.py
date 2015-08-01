@@ -16,6 +16,12 @@ def recommend(artists, songs):
   result = get_tempo_filter_result(album, rhythm_input)
   return json.dumps(result)
 
+def get_spotify_track_uri(artist, song):
+  baseURL = "https://api.spotify.com/v1/search"
+  url = baseURL + "?q=artist:" + artist + " track:" + song + "&type=track"
+  responseJSON = json.loads(requests.get(url).text)
+  return responseJSON['tracks']['items'][0]['uri']
+
 def get_tempo_filter_result(album, rhythm_input):
   result = {}
   full_match_result = filter(lambda x: x['TRACK'][0]['TEMPO'][0]['VALUE'] == rhythm_input['tempo_speed'], album)
@@ -30,6 +36,7 @@ def get_tempo_filter_result(album, rhythm_input):
     result['artist'] = album[min_index]['ARTIST'][0]['VALUE']
     result['song'] = album[min_index]['TRACK'][0]['TITLE'][0]['VALUE']
     result['cover_url'] = album[min_index]['URL'][0]['VALUE']
+  result['spotify_uri'] = get_spotify_track_uri(result['artist'], result['song'])
   return result
 
 def get_gerne_mapping(rhythm_input):

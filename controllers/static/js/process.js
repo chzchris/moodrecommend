@@ -1,7 +1,7 @@
 function getRecommend() {
 	var ele = document.getElementById("result");
 	if (ele.style.display != "none") {
-		var result = document.getElementById("resultTrack");
+		var result = document.getElementById("recommend");
 		result.innerHTML = "";
 		ele.style.display = "none";
 	}
@@ -56,12 +56,14 @@ function getRecommend() {
 		if (req.readyState==4 && req.status == 200) {
 		// Request successful, read the response
 
+		/*
 		var resultJSON = JSON.parse(req.responseText);
 		var result = document.getElementById("resultTrack");
 		var coverArt = document.getElementById("resultArt");
 		result.innerHTML = resultJSON.song + " - " + resultJSON.artist;
         coverArt.src = resultJSON.cover_url;
 		ele.style.display = "block";
+		*/
 
 		/*
 		var ele = document.getElementById("playlist");
@@ -70,6 +72,18 @@ function getRecommend() {
 		result.appendChild(document.createTextNode(resultJSON.song + " - " + resultJSON.artist));
 		ele.appendChild(result);
 		*/
+
+		var resultJSON = JSON.parse(req.responseText);
+		var panel = document.getElementById("result");
+		var ele = document.getElementById("recommend");
+		var result = document.createElement('iframe');
+		result.src = "https://embed.spotify.com/?uri=" + resultJSON.spotify_uri;
+		result.width = "100%";
+		result.height = "300";
+		result.setAttribute("frameborder", "0");
+		result.setAttribute("allowtransparency", "true");
+		ele.appendChild(result);
+		panel.style.display = "block";
 		}
 	}
 	
